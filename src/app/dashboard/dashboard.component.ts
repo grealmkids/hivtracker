@@ -20,6 +20,8 @@ export class DashboardComponent {
   editPatientForm: FormGroup;
   editPatientFormVisible = false;
   showDynamicData: boolean = false;
+  editedPatient: boolean = false;
+  deletedpatientAlert:boolean=false;
 
   constructor(
     private supabaseService: SupabaseService,
@@ -48,7 +50,6 @@ export class DashboardComponent {
   }
 
   ngOnInit() {
-  
     // Check for query params and reload patients if reload=true
     this.activatedRoute.queryParams.subscribe((params) => {
       if (params['reload'] === 'true') {
@@ -72,7 +73,7 @@ export class DashboardComponent {
     this.showPatients = false;
     this.newPatient = false;  // Show new patient form
     this.selectedPatient = patient;
-   
+
     this.editPatientForm.patchValue({
       name: patient.name,
       dob: patient.dob,
@@ -91,27 +92,27 @@ export class DashboardComponent {
     // Set the form to be visible
     this.showDynamicData = false;
     this.editPatientFormVisible = true;
-    
   }
 
   // Handle form submission for saving changes
   async onSubmitEdit() {
     this.showDynamicData = false;
-    if(this.editPatientFormVisible){
-      this.showDynamicData = false;
+    try {
+      const updatedData = this.editPatientForm.value;
+      const { error } = await this.supabaseService.updateStaticPatient(this.selectedPatient.id, updatedData);
+      if (error) {
+        console.error('Error updating patient:', error);
+      } else {
+        this.editPatientFormVisible = false;
+        this.editedPatient = true;  // Reload the patient list after update
+      }
+    } catch (error) {
+      console.log(error);
     }
-  try {
-    const updatedData = this.editPatientForm.value;
-    const { error } = await this.supabaseService.updateStaticPatient(this.selectedPatient.id, updatedData);
-    if (error) {
-      console.error('Error updating patient:', error);
-    } else {
-      this.editPatientFormVisible = false;
-      this.loadPatients();  // Reload the patient list after update
-    }
-  } catch (error) {
-    console.log(error);
   }
+
+  reloadPatients() {
+    window.location.href = '/dashboard'; // Hard reload  
   }
 
   // Fetch dynamic data for a selected patient
@@ -128,7 +129,7 @@ export class DashboardComponent {
 
   // Function to reset the view to show patients list only
   showAllPatients() {
-    this.newPatient=false;
+    this.newPatient = false;
     this.editPatientFormVisible = false;
     this.showPatients = true; // Show the patient list
     this.selectedPatient = null; // Reset selected patient
@@ -140,6 +141,20 @@ export class DashboardComponent {
     this.showDynamicData = false;
     this.showPatients = false;  // Hide patient list
     this.newPatient = true;  // Show new patient form
+  }
+
+  // Delete patient function
+  async onDeletePatient() {
+    if (confirm('Are you sure you want to delete this patient?')) {
+      const { error } = await this.supabaseService.deletePatient(this.selectedPatient.id);
+      if (error) {
+        console.error('Error deleting patient:', error);
+      } else {
+        this.deletedpatientAlert=true;
+        this.selectedPatient = null;  // Reset selected patient after deletion
+        this.editPatientFormVisible = false;  // Hide edit form after deletion
+      }
+    }
   }
 
   // Logout function

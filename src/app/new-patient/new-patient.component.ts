@@ -58,7 +58,7 @@ export class NewPatientComponent {
   }
   
   showAllPatients() {
-    this.router.navigate(['/dashboard']);
+    window.location.href = '/dashboard'; // Hard reload  
   }
 
 }

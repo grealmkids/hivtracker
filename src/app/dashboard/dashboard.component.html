@@ -62,12 +62,41 @@
         <app-new-patient></app-new-patient>
       </div>
       <!-- Router Outlet for NewPatientComponent -->
-
+      <div class="my-5" *ngIf="editedPatient">
+        <h5 class="alert alert-success text-center my-5">
+          Successfully edited patient
+          <i class="bi bi-check-fill text-success"></i>
+        </h5>
+        <p class="text-center">
+          <a
+            (click)="reloadPatients()"
+            class="btn btn-dark px-3 align-middle px-0"
+          >
+            <span class="ms-1 d-none d-sm-inline">All Patients</span>
+            <i class="fs-4 bi-database-fill ms-2"></i>
+          </a>
+        </p>
+      </div>
+      <div class="my-5" *ngIf="deletedpatientAlert">
+        <h5 class="alert alert-success text-center my-5">
+          Successfully deleted patient
+          <i class="bi bi-check-fill text-success"></i>
+        </h5>
+        <p class="text-center">
+          <a
+            (click)="reloadPatients()"
+            class="btn btn-dark px-3 align-middle px-0"
+          >
+            <span class="ms-1 d-none d-sm-inline">All Patients</span>
+            <i class="fs-4 bi-database-fill ms-2"></i>
+          </a>
+        </p>
+      </div>
       <div class="m-0" *ngIf="!newPatient">
         <!-- Patients Table -->
         <div *ngIf="showPatients">
           <h2 class="subtitle">Patients List</h2>
-          <table class="table table-bordered table-hover">
+          <table class="table table-bordered table-striped">
             <thead>
               <tr>
                 <th>Name</th>
@@ -125,7 +154,13 @@
           *ngIf="editPatientFormVisible && !showDynamicData"
           class="container"
         >
-          <h2 class="text-center subtitle">Edit Patient</h2>
+          <h2 class="text-center subtitle">
+            Edit Patient
+            <button class="btn btn-danger" (click)="onDeletePatient()">
+              <i class="bi bi-trash"></i> Delete
+            </button>
+          </h2>
+
           <form
             [formGroup]="editPatientForm"
             (ngSubmit)="onSubmitEdit()"
@@ -248,7 +283,7 @@
                   />
                 </div>
                 <button type="submit" class="w-100 btn btn-primary mt-3">
-                  Save Changes
+                  Update Patient Data
                 </button>
               </div>
             </div>
@@ -256,10 +291,7 @@
         </div>
 
         <!-- Dynamic Data for the selected patient -->
-        <div
-          *ngIf="selectedPatient && !showPatients && !showDynamicData"
-          class="mt-4"
-        >
+        <div *ngIf="selectedPatient && !editedPatient" class="mt-4">
           <h2 class="subtitle">
             Track <span class="text-danger">{{ selectedPatient.name }}</span>
           </h2>
