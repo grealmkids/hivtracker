@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class NewPatientComponent {
   newPatientForm: FormGroup;
+  showNewPatientForm:boolean=true;
 
   constructor(
     private fb: FormBuilder,
@@ -45,8 +46,10 @@ export class NewPatientComponent {
           console.error('Error adding patient:', error);
         } else {
           console.log('Patient added successfully:', data);
+          this.showNewPatientForm=false;
+
           // After successful addition, navigate back to the dashboard with reload flag
-          this.router.navigate(['/dashboard'], { queryParams: { reload: true } });
+          //this.router.navigate(['/dashboard'], { queryParams: { reload: true } });
         }
       } catch (error) {
         console.error('Error submitting form:', error);

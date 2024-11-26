@@ -48,6 +48,7 @@ export class DashboardComponent {
   }
 
   ngOnInit() {
+  
     // Check for query params and reload patients if reload=true
     this.activatedRoute.queryParams.subscribe((params) => {
       if (params['reload'] === 'true') {
@@ -71,7 +72,7 @@ export class DashboardComponent {
     this.showPatients = false;
     this.newPatient = false;  // Show new patient form
     this.selectedPatient = patient;
-    this.showDynamicData = false;
+   
     this.editPatientForm.patchValue({
       name: patient.name,
       dob: patient.dob,
@@ -88,21 +89,29 @@ export class DashboardComponent {
     });
 
     // Set the form to be visible
+    this.showDynamicData = false;
     this.editPatientFormVisible = true;
+    
   }
 
   // Handle form submission for saving changes
   async onSubmitEdit() {
-    if (this.editPatientForm.valid) {
-      const updatedData = this.editPatientForm.value;
-      const { error } = await this.supabaseService.updateStaticPatient(this.selectedPatient.id, updatedData);
-      if (error) {
-        console.error('Error updating patient:', error);
-      } else {
-        this.editPatientFormVisible = false;
-        this.loadPatients();  // Reload the patient list after update
-      }
+    this.showDynamicData = false;
+    if(this.editPatientFormVisible){
+      this.showDynamicData = false;
     }
+  try {
+    const updatedData = this.editPatientForm.value;
+    const { error } = await this.supabaseService.updateStaticPatient(this.selectedPatient.id, updatedData);
+    if (error) {
+      console.error('Error updating patient:', error);
+    } else {
+      this.editPatientFormVisible = false;
+      this.loadPatients();  // Reload the patient list after update
+    }
+  } catch (error) {
+    console.log(error);
+  }
   }
 
   // Fetch dynamic data for a selected patient
