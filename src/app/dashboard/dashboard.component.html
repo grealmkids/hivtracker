@@ -40,7 +40,8 @@
           </ul>
 
           <hr />
-          <p class="mt-auto mb-3 text-white text-center">
+          <img src="logo.jpg" class="img-fluid mb-0" alt="" srcset="" />
+          <p class="mt-0 mb-3 text-white text-center">
             © Dr. Fredrick Katongole
           </p>
           <p>
@@ -315,12 +316,6 @@
                 <th>Exit Status</th>
               </tr>
             </thead>
-            <div
-              class="text-center p-5"
-              *ngIf="dynamicData.length === 0 && selectedPatient"
-            >
-              <h1 class="alert alert-danger mx-auto">No Calls Yet !</h1>
-            </div>
 
             <tbody *ngIf="dynamicData.length > 0">
               <tr *ngFor="let data of dynamicData">
