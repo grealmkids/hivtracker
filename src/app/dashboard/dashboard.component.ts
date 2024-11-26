@@ -119,6 +119,7 @@ export class DashboardComponent {
 
   // Function to reset the view to show patients list only
   showAllPatients() {
+    this.newPatient=false;
     this.editPatientFormVisible = false;
     this.showPatients = true; // Show the patient list
     this.selectedPatient = null; // Reset selected patient
