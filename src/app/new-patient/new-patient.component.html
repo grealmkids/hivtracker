@@ -111,7 +111,13 @@
   </form>
 </div>
 <div class="my-5" *ngIf="!showNewPatientForm">
-  <h5 class="alert alert-success">
+  <h5 class="alert alert-success text-center my-5">
     Successfully added new patient <i class="bi bi-check-fill text-success"></i>
   </h5>
+  <p class="text-center">
+    <a (click)="showAllPatients()" class="btn blackbtn px-3 align-middle px-0">
+      <span class="ms-1 d-none d-sm-inline">All Patients</span>
+      <i class="fs-4 bi-database-fill ms-2"></i>
+    </a>
+  </p>
 </div>

@@ -57,4 +57,8 @@ export class NewPatientComponent {
     }
   }
   
+  showAllPatients() {
+    this.router.navigate(['/dashboard']);
+  }
+
 }
