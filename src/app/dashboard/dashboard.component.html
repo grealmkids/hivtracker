@@ -115,16 +115,17 @@
       </div>
 
       <!-- Edit Patient Form -->
-      <div *ngIf="editPatientFormVisible" class="container">
-        <h2>Edit Patient</h2>
+      <div *ngIf="editPatientFormVisible && !showDynamicData" class="container">
+        <h2 class="text-center subtitle">Edit Patient</h2>
         <form
           [formGroup]="editPatientForm"
           (ngSubmit)="onSubmitEdit()"
           class="innerform"
         >
           <div class="row">
+            <div class="col-md-3"></div>
             <!-- First Column -->
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-3">
               <div class="form-group">
                 <label for="name">Name</label>
                 <input id="name" formControlName="name" class="form-control" />
@@ -175,7 +176,7 @@
             </div>
 
             <!-- Second Column -->
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-3">
               <div class="form-group">
                 <label for="district">District</label>
                 <input
@@ -233,17 +234,21 @@
                   class="form-control"
                 />
               </div>
+              <button type="submit" class="w-100 btn btn-primary mt-3">
+                Save Changes
+              </button>
             </div>
           </div>
-
-          <button type="submit" class="btn btn-primary mt-3">
-            Save Changes
-          </button>
         </form>
       </div>
 
       <!-- Dynamic Data for the selected patient -->
-      <div *ngIf="selectedPatient" class="mt-4">
+      <div
+        *ngIf="
+          selectedPatient && !showPatients && !newPatient && !showDynamicData
+        "
+        class="mt-4"
+      >
         <h2 class="subtitle">
           Track <span class="text-danger">{{ selectedPatient.name }}</span>
         </h2>
@@ -258,7 +263,10 @@
               <th>Exit Status</th>
             </tr>
           </thead>
-          <div class="text-center p-5" *ngIf="dynamicData.length === 0">
+          <div
+            class="text-center p-5"
+            *ngIf="dynamicData.length === 0 && selectedPatient"
+          >
             <h1 class="alert alert-danger mx-auto">No Calls Yet !</h1>
           </div>
 
