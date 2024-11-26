@@ -1,9 +1,10 @@
 <div class="container">
-  <h2>Add New Patient</h2>
-  <form [formGroup]="newPatientForm" (ngSubmit)="onSubmit()">
-    <div class="row">
+  <h2 class="subtitle">Add New Patient</h2>
+  <form [formGroup]="newPatientForm" (ngSubmit)="onSubmit()" class="innerform">
+    <div class="row mx-auto">
+      <div class="col-12 col-md-3"></div>
       <!-- First Column -->
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-3">
         <div class="form-group">
           <label for="name">Name</label>
           <input id="name" formControlName="name" class="form-control" />
@@ -46,7 +47,7 @@
       </div>
 
       <!-- Second Column -->
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-3">
         <div class="form-group">
           <label for="district">District</label>
           <input
@@ -102,9 +103,10 @@
             class="form-control"
           />
         </div>
+        <button type="submit" class="btn btn-primary w-100 mt-3">
+          Add Patient
+        </button>
       </div>
     </div>
-
-    <button type="submit" class="btn btn-primary mt-3">Add Patient</button>
   </form>
 </div>

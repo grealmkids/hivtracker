@@ -115,7 +115,11 @@
       <!-- Edit Patient Form -->
       <div *ngIf="editPatientFormVisible" class="container">
         <h2>Edit Patient</h2>
-        <form [formGroup]="editPatientForm" (ngSubmit)="onSubmitEdit()">
+        <form
+          [formGroup]="editPatientForm"
+          (ngSubmit)="onSubmitEdit()"
+          class="innerform"
+        >
           <div class="row">
             <!-- First Column -->
             <div class="col-12 col-md-6">

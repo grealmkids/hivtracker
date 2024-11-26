@@ -39,3 +39,7 @@ body {
   text-align: center;
   color: #a4a4a4;
 }
+
+.innerform input {
+  border: 2px solid #000000;
+}
