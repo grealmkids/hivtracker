@@ -22,6 +22,11 @@ export class DashboardComponent {
   showDynamicData: boolean = false;
   editedPatient: boolean = false;
   deletedpatientAlert:boolean=false;
+  filteredPatients: any[] = []; // New variable for filtered patients
+
+  deletedPatientAlert = false;  // Corrected variable name
+
+  searchQuery: string = ''; // Added search query
 
   constructor(
     private supabaseService: SupabaseService,
@@ -65,6 +70,7 @@ export class DashboardComponent {
       console.error('Error fetching patients:', error);
     } else {
       this.patients = data || [];
+      this.filteredPatients = [...this.patients]; // Initialize filtered patients list
     }
   }
 
@@ -161,5 +167,13 @@ export class DashboardComponent {
   async logout() {
     await this.supabaseService.logout();
     this.router.navigate(['/login']);
+  }
+
+  onSearchChange(query: string) {
+    this.searchQuery = query.toLowerCase();
+    this.filteredPatients = this.patients.filter(patient =>
+      patient.name.toLowerCase().includes(this.searchQuery) ||
+      patient.mobile.includes(this.searchQuery) // Add other fields as needed
+    );
   }
 }

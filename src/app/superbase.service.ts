@@ -39,6 +39,20 @@ export class SupabaseService {
     return this.supabase.from('static_patient_data').select('*');
   }
 
+  async searchPatients(query: string) {
+    // Construct a query that looks for matches in name, district, or clinic
+    const { data, error } = await this.supabase
+      .from('static_patient_data')
+      .select('*')
+      .ilike('name', `%${query}%`) // Searches for name (case insensitive)
+      .or(`district.ilike.%${query}%,clinic.ilike.%${query}%`); // Optionally search district or clinic as well
+    
+    if (error) {
+      throw new Error(error.message);
+    }
+    return data;
+  }
+
   // Fetch all dynamic patient data linked to a specific patient
   async getDynamicData(patientId: string) {
     return this.supabase

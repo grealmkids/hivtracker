@@ -95,7 +95,16 @@
       <div class="m-0" *ngIf="!newPatient">
         <!-- Patients Table -->
         <div *ngIf="showPatients">
-          <h2 class="subtitle">Patients List</h2>
+          <form>
+            <h2 class="subtitle">
+              Patients List
+              <input
+                type="text"
+                placeholder="Search patient name"
+                (input)="onSearchChange(searchQuery)"
+              />
+            </h2>
+          </form>
           <table class="table table-bordered table-striped">
             <thead>
               <tr>
