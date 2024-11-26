@@ -1,0 +1,71 @@
+<div class="row">
+  <h1 class="display-1 p-3 sidebarbg text-center">HIV TRACKER</h1>
+  <div class="col-md-3 mx-auto my-auto pb-5">
+    <main class="w-100 m-auto">
+      <div>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="m-2">
+          <h1 class="text-center display-1 d-none">
+            <span class="bi bi-lock-fill"></span>
+          </h1>
+          <img
+            src="logo.png"
+            class="img-fluid p-3 text-center"
+            alt=""
+            srcset=""
+          />
+          <h1 class="h3 mb-3 fw-normal text-center">Please sign in</h1>
+
+          <input
+            type="email"
+            class="form-control logininput text-center"
+            id="email"
+            name="email"
+            formControlName="email"
+            placeholder="Email"
+          />
+          <br />
+          <i
+            class="mt-1 text-danger"
+            *ngIf="
+              loginForm.controls['email'].invalid &&
+              (loginForm.controls['email'].dirty ||
+                loginForm.controls['email'].touched)
+            "
+          >
+            Email is required and must be valid
+          </i>
+
+          <input
+            type="password"
+            class="form-control logininput text-center"
+            id="password"
+            name="password"
+            formControlName="password"
+            placeholder="Password"
+          />
+          <br />
+          <i
+            class="mt-1 text-danger"
+            *ngIf="
+              loginForm.controls['password'].invalid &&
+              (loginForm.controls['password'].dirty ||
+                loginForm.controls['password'].touched)
+            "
+          >
+            Password Must Be at Least 7 Characters
+          </i>
+          <p class="text-center">
+            <input
+              type="submit"
+              class="text-center btn btn-dark w-50"
+              [disabled]="loginForm.invalid"
+            />
+          </p>
+          <p class="mt-5 mb-3 text-body-secondary text-center">
+            © Dr. Fredrick Katongole
+          </p>
+        </form>
+      </div>
+    </main>
+  </div>
+</div>

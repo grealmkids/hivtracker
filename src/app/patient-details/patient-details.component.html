@@ -1,0 +1,21 @@
+<div class="container mt-4">
+  <h2>Patient Details</h2>
+  <div *ngIf="patientData; else noData">
+    <h4>{{ patientData.name }}</h4>
+    <p><strong>Date of Birth:</strong> {{ patientData.dob }}</p>
+    <p><strong>Clinic:</strong> {{ patientData.clinic }}</p>
+    <p><strong>Village:</strong> {{ patientData.village }}</p>
+    <p><strong>Mobile:</strong> {{ patientData.mobile }}</p>
+    <hr />
+    <h3>Call Reminders</h3>
+    <ul>
+      <li *ngFor="let call of dynamicData">
+        Call #{{ call.reminder_call_number }}: {{ call.adherence_challenges }}
+      </li>
+    </ul>
+  </div>
+
+  <ng-template #noData>
+    <p>No patient data available.</p>
+  </ng-template>
+</div>

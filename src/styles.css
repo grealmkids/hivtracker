@@ -1,0 +1,41 @@
+body {
+  font-family: "Poppins", serif !important;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.sidebarbg {
+  background-color: #247393 !important;
+  color: #ffffff !important;
+}
+.nav-item .blackbtn {
+  color: #ffffff;
+  background-color: #000000;
+}
+.nav-link {
+  color: #b70000;
+}
+.title {
+  background-color: #fff94e;
+  padding: 10px;
+  font-weight: bold;
+  color: #b70000;
+}
+.dashboardtitle {
+  color: #6a6a6a;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+.dashheader {
+  color: #000000;
+  background-color: #dfdfdf;
+}
+
+.logininput {
+  border: 2px solid #000000;
+}
+.subtitle {
+  text-align: center;
+  color: #a4a4a4;
+}

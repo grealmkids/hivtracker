@@ -1,0 +1,289 @@
+<div class="container-fluid overflow-hidden">
+  <div class="row flex-nowrap">
+    <!-- Sidebar -->
+    <div class="col-auto col-md-3 col-xl-2 sidebarbg px-sm-2 px-0">
+      <div id="sidebar" class="collapse d-md-block sidebar">
+        <div
+          class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white"
+          style="position: sticky; top: 0; height: 100vh"
+        >
+          <ul
+            class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+            id="menu"
+          >
+            <li class="nav-item mt-5 mb-3">
+              <a
+                (click)="showAllPatients()"
+                class="btn blackbtn px-3 align-middle px-0"
+              >
+                <span class="ms-1 d-none d-sm-inline">All Patients</span>
+                <i class="fs-4 bi-database-fill ms-2"></i>
+              </a>
+            </li>
+            <!-- Sidebar Item to add New Patient -->
+            <li class="nav-item mb-3">
+              <button
+                (click)="navigateToAddPatient()"
+                class="btn btn-light px-3 align-middle px-0"
+              >
+                <span class="ms-1 d-none d-sm-inline">New Patient</span>
+                <i class="fs-4 bi bi-plus ms-2"></i>
+              </button>
+            </li>
+
+            <li class="nav-item mb-3">
+              <a href="#" class="btn btn-light px-3 align-middle px-0">
+                <span class="ms-1 d-none d-sm-inline">Phone Calls</span>
+                <i class="fs-4 bi-telephone-fill ms-2"></i>
+              </a>
+            </li>
+          </ul>
+
+          <hr />
+          <p class="mt-auto mb-3 text-white text-center">
+            © Dr. Fredrick Katongole
+          </p>
+          <p>
+            <a class="btn btn-danger" (click)="logout()">
+              <span class="bi bi-power me-2"></span> Logout
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col py-3 bg-light" style="overflow-y: auto; height: 100vh">
+      <h1 class="text-center mb-4 w-100 p-3 dashheader">HIV TRACKER</h1>
+
+      <!-- Patients Table -->
+      <div *ngIf="showPatients">
+        <h2 class="subtitle">Patients List</h2>
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Date of Birth</th>
+              <th>Clinic</th>
+              <th>Village</th>
+              <th>District</th>
+              <th>Mobile</th>
+              <th>WhatsApp No.</th>
+              <th>NOK</th>
+              <th>NOK Contact</th>
+              <th>Favourite Social Media</th>
+              <th>Favourite Radio</th>
+              <th>Favourite TV</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let patient of patients">
+              <td>{{ patient.name }}</td>
+              <td>{{ patient.age }}</td>
+              <td>{{ patient.dob }}</td>
+              <td>{{ patient.clinic }}</td>
+              <td>{{ patient.village }}</td>
+              <td>{{ patient.district }}</td>
+              <td>{{ patient.mobile }}</td>
+              <td>{{ patient.whatsapp_no }}</td>
+              <td>{{ patient.nok }}</td>
+              <td>{{ patient.nok_contact }}</td>
+              <td>{{ patient.favourite_social_media }}</td>
+              <td>{{ patient.favourite_radio }}</td>
+              <td>{{ patient.favourite_tv }}</td>
+              <td>
+                <button
+                  class="btn btn-sm btn-primary m-1"
+                  (click)="loadDynamicData(patient.id)"
+                >
+                  Track
+                </button>
+                <button
+                  class="btn btn-sm btn-dark m-1"
+                  (click)="loadPatientForEdit(patient)"
+                >
+                  Edit
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Edit Patient Form -->
+      <div *ngIf="editPatientFormVisible" class="container">
+        <h2>Edit Patient</h2>
+        <form [formGroup]="editPatientForm" (ngSubmit)="onSubmitEdit()">
+          <div class="row">
+            <!-- First Column -->
+            <div class="col-12 col-md-6">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input id="name" formControlName="name" class="form-control" />
+              </div>
+
+              <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <input
+                  id="dob"
+                  formControlName="dob"
+                  type="date"
+                  class="form-control"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="clinic">Clinic</label>
+                <input
+                  id="clinic"
+                  formControlName="clinic"
+                  class="form-control"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="village">Village</label>
+                <input
+                  id="village"
+                  formControlName="village"
+                  class="form-control"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="mobile">Mobile Number</label>
+                <input
+                  id="mobile"
+                  formControlName="mobile"
+                  type="text"
+                  class="form-control"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="nok">Next of Kin</label>
+                <input id="nok" formControlName="nok" class="form-control" />
+              </div>
+            </div>
+
+            <!-- Second Column -->
+            <div class="col-12 col-md-6">
+              <div class="form-group">
+                <label for="district">District</label>
+                <input
+                  id="district"
+                  formControlName="district"
+                  class="form-control"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="whatsapp_no">Whatsapp Number</label>
+                <input
+                  id="whatsapp_no"
+                  formControlName="whatsapp_no"
+                  type="text"
+                  class="form-control"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="nok_contact">Next of Kin Contact</label>
+                <input
+                  id="nok_contact"
+                  formControlName="nok_contact"
+                  type="text"
+                  class="form-control"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="favourite_social_media"
+                  >Favourite Social Media</label
+                >
+                <input
+                  id="favourite_social_media"
+                  formControlName="favourite_social_media"
+                  class="form-control"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="favourite_radio">Favourite Radio</label>
+                <input
+                  id="favourite_radio"
+                  formControlName="favourite_radio"
+                  class="form-control"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="favourite_tv">Favourite TV</label>
+                <input
+                  id="favourite_tv"
+                  formControlName="favourite_tv"
+                  class="form-control"
+                />
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary mt-3">
+            Save Changes
+          </button>
+        </form>
+      </div>
+
+      <!-- Dynamic Data for the selected patient -->
+      <div *ngIf="selectedPatient" class="mt-4">
+        <h2 class="subtitle">
+          Track <span class="text-danger">{{ selectedPatient.name }}</span>
+        </h2>
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>Call Number</th>
+              <th>Reminder Date</th>
+              <th>Adherence</th>
+              <th>Baby PCR</th>
+              <th>HIV Serology</th>
+              <th>Exit Status</th>
+            </tr>
+          </thead>
+          <div class="text-center p-5" *ngIf="dynamicData.length === 0">
+            <h1 class="alert alert-danger mx-auto">No Calls Yet !</h1>
+          </div>
+
+          <tbody *ngIf="dynamicData.length > 0">
+            <tr *ngFor="let data of dynamicData">
+              <td>{{ data.reminder_call_number }}</td>
+              <td>{{ data.reminder_date }}</td>
+              <td>{{ data.adherence_challenges }}</td>
+              <td>{{ data.baby_pcr_result }}</td>
+              <td>{{ data.hiv_serology_18_months }}</td>
+              <td>{{ data.exit_status }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Optional Default Content -->
+      <div
+        *ngIf="!newPatient && !showPatients && !selectedPatient"
+        class="text-center"
+      >
+        <p>Welcome to the dashboard! Use the sidebar to navigate.</p>
+      </div>
+
+      <div
+        *ngIf="newPatient && !showPatients && !showDynamicData"
+        class="text-center"
+      >
+        <app-new-patient></app-new-patient>
+      </div>
+      <!-- Router Outlet for NewPatientComponent -->
+    </div>
+  </div>
+</div>
