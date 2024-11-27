@@ -246,10 +246,26 @@ labForselectedPatient: any;
        this.loadLabResults(this.selectedPatient.id);
         }
 
-  
+        showalllabresults() {
+          this.showDynamicData = false;
+          this.showPatients = false;  // Hide patient list
+          this.newPatient = false;  // Show new patient form
+          this.bulksms=false;
+          this.editPatientFormVisible = false;
+         this.labresults=true;
+        this.labResultForselectedpatient=false;
+        
+         this.loadAllLabResults();
+          }
         
   
         selectedPatientLabResults: any[] = [];
+
+        
+        loadAllLabResults() {
+          this.labResultForselectedpatient = true;  // Keep lab results flag true to show the lab results section
+          this.fetchAllLabResults();  // Fetch the lab results for the selected patient
+        }
 
         loadLabResults(patientId: number) {
           this.labResultForselectedpatient = true;  // Keep lab results flag true to show the lab results section
@@ -267,5 +283,14 @@ labForselectedPatient: any;
           }
         }
         
+
+        async fetchAllLabResults() {
+          const { data, error } = await this.supabaseService.getAllLabResults()
+          if (error) {
+            console.error('Error fetching lab results:', error);
+          } else {
+            this.AllLabResults = data || [];
+          }
+        }
           
 }

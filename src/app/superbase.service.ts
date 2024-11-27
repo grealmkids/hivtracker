@@ -111,5 +111,9 @@ async getLabResultsForPatient(patientId: string) {
     .eq('patient_id', patientId);  // Filter lab results by patient_id
 }
 
+async getAllLabResults() {
+  return this.supabase.from('labresults').select('*');
+}
+
 
 }
