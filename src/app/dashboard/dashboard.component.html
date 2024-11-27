@@ -83,43 +83,75 @@
           Lab Results for
           <span class="text-danger">{{ selectedPatient.name }}</span>
         </h2>
-
-        <table class="table table-bordered table-striped">
-          <thead>
-            <tr>
-              <th>Patient ID</th>
-              <th>Last HIV Viral Load</th>
-              <th>Last HIV Date Done</th>
-              <th>First Trimester Viral Load</th>
-              <th>First Trimester Date Done</th>
-              <th>Second Trimester Viral Load</th>
-              <th>Second Trimester Date Done</th>
-              <th>Third Trimester Viral Load</th>
-              <th>Third Trimester Date Done</th>
-              <th>Baby PCR at 6 Months</th>
-              <th>Baby PCR Date Done</th>
-              <th>HIV Serology at 18 Months</th>
-              <th>HIV Serology Date Done</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let labResult of selectedPatientLabResults">
-              <td>{{ labResult.patient_id }}</td>
-              <td>{{ labResult.last_hiv_viral_load }}</td>
-              <td>{{ labResult.last_hiv_date_done | date }}</td>
-              <td>{{ labResult.first_trimester_viral_load }}</td>
-              <td>{{ labResult.first_trimester_date_done | date }}</td>
-              <td>{{ labResult.second_trimester_viral_load }}</td>
-              <td>{{ labResult.second_trimester_date_done | date }}</td>
-              <td>{{ labResult.third_trimester_viral_load }}</td>
-              <td>{{ labResult.third_trimester_date_done | date }}</td>
-              <td>{{ labResult.baby_pcr_at_6_months }}</td>
-              <td>{{ labResult.baby_pcr_date_done | date }}</td>
-              <td>{{ labResult.hiv_serology_at_18_months }}</td>
-              <td>{{ labResult.hiv_serology_date_done | date }}</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
+            <div class="table-responsive">
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Test</th>
+                    <th>Result</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let labResult of selectedPatientLabResults">
+                    <td>Patient ID</td>
+                    <td>{{ labResult.patient_id }}</td>
+                  </tr>
+                  <tr *ngFor="let labResult of selectedPatientLabResults">
+                    <td>Last HIV Viral Load</td>
+                    <td>{{ labResult.last_hiv_viral_load }}</td>
+                  </tr>
+                  <tr *ngFor="let labResult of selectedPatientLabResults">
+                    <td>Last HIV Date Done</td>
+                    <td>{{ labResult.last_hiv_date_done | date }}</td>
+                  </tr>
+                  <tr *ngFor="let labResult of selectedPatientLabResults">
+                    <td>First Trimester Viral Load</td>
+                    <td>{{ labResult.first_trimester_viral_load }}</td>
+                  </tr>
+                  <tr *ngFor="let labResult of selectedPatientLabResults">
+                    <td>First Trimester Date Done</td>
+                    <td>{{ labResult.first_trimester_date_done | date }}</td>
+                  </tr>
+                  <tr *ngFor="let labResult of selectedPatientLabResults">
+                    <td>Second Trimester Viral Load</td>
+                    <td>{{ labResult.second_trimester_viral_load }}</td>
+                  </tr>
+                  <tr *ngFor="let labResult of selectedPatientLabResults">
+                    <td>Second Trimester Date Done</td>
+                    <td>{{ labResult.second_trimester_date_done | date }}</td>
+                  </tr>
+                  <tr *ngFor="let labResult of selectedPatientLabResults">
+                    <td>Third Trimester Viral Load</td>
+                    <td>{{ labResult.third_trimester_viral_load }}</td>
+                  </tr>
+                  <tr *ngFor="let labResult of selectedPatientLabResults">
+                    <td>Third Trimester Date Done</td>
+                    <td>{{ labResult.third_trimester_date_done | date }}</td>
+                  </tr>
+                  <tr *ngFor="let labResult of selectedPatientLabResults">
+                    <td>Baby PCR at 6 Months</td>
+                    <td>{{ labResult.baby_pcr_at_6_months }}</td>
+                  </tr>
+                  <tr *ngFor="let labResult of selectedPatientLabResults">
+                    <td>Baby PCR Date Done</td>
+                    <td>{{ labResult.baby_pcr_date_done | date }}</td>
+                  </tr>
+                  <tr *ngFor="let labResult of selectedPatientLabResults">
+                    <td>HIV Serology at 18 Months</td>
+                    <td>{{ labResult.hiv_serology_at_18_months }}</td>
+                  </tr>
+                  <tr *ngFor="let labResult of selectedPatientLabResults">
+                    <td>HIV Serology Date Done</td>
+                    <td>{{ labResult.hiv_serology_date_done | date }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div

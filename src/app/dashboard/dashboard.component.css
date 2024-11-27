@@ -8,3 +8,13 @@ input {
   border: 3px solid #000000;
   border-radius: 10px;
 }
+td,
+th {
+  text-align: left;
+}
+td {
+  font-size: 14px;
+}
+th {
+  font-size: 18px;
+}
