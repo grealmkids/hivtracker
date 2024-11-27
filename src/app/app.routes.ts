@@ -31,6 +31,14 @@ export const routes: Routes = [
       ),
     canActivate: [AuthGuard], // Ensure that only authenticated users can access
   },
+  {
+    path: 'bulksms', // New route for adding a patient
+    loadComponent: () =>
+      import('./send-bulk-sms/send-bulk-sms.component').then(
+        (com) => com.SendBulkSmsComponent
+      ),
+    canActivate: [AuthGuard], // Ensure that only authenticated users can access
+  },
   
   {
     path: '',

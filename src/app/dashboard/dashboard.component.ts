@@ -4,14 +4,16 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { SupabaseService } from '../superbase.service';
 import { CommonModule } from '@angular/common';
 import { NewPatientComponent } from "../new-patient/new-patient.component";
+import { SendBulkSmsComponent } from "../send-bulk-sms/send-bulk-sms.component";
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, RouterModule, ReactiveFormsModule, NewPatientComponent],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule, NewPatientComponent, SendBulkSmsComponent],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent {
+
   patients: any[] = [];
   selectedPatient: any = null;
   dynamicData: any[] = [];
@@ -23,6 +25,7 @@ export class DashboardComponent {
   editedPatient: boolean = false;
   deletedpatientAlert:boolean=false;
   filteredPatients: any[] = []; // New variable for filtered patients
+  bulksms:boolean=false;
 
   deletedPatientAlert = false;  // Corrected variable name
 
@@ -140,6 +143,7 @@ export class DashboardComponent {
     this.showPatients = true; // Show the patient list
     this.selectedPatient = null; // Reset selected patient
     this.dynamicData = []; // Clear dynamic data
+    
   }
 
   // Function to navigate to the new patient form
@@ -176,4 +180,8 @@ export class DashboardComponent {
       patient.mobile.includes(this.searchQuery) // Add other fields as needed
     );
   }
+
+  sendBulkSMS() {
+    this.router.navigateByUrl('/bulksms');
+    }
 }

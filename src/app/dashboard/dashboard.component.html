@@ -12,29 +12,32 @@
             id="menu"
           >
             <li class="nav-item mt-5 mb-3">
-              <a
+              <button
                 (click)="showAllPatients()"
-                class="btn blackbtn px-3 align-middle px-0"
+                class="btn blackbtn w-100 px-3 align-middle px-0"
               >
                 <span class="ms-1 d-none d-sm-inline">All Patients</span>
                 <i class="fs-4 bi-database-fill ms-2"></i>
-              </a>
+              </button>
             </li>
             <!-- Sidebar Item to add New Patient -->
             <li class="nav-item mb-3">
               <button
                 (click)="navigateToAddPatient()"
-                class="btn btn-light px-3 align-middle px-0"
+                class="btn btn-light px-3 w-100 align-middle px-0"
               >
                 <span class="ms-1 d-none d-sm-inline">New Patient</span>
                 <i class="fs-4 bi bi-plus ms-2"></i>
               </button>
             </li>
 
-            <li class="nav-item mb-3 d-none">
-              <a href="#" class="btn btn-light px-3 align-middle px-0">
-                <span class="ms-1 d-none d-sm-inline">Phone Calls</span>
-                <i class="fs-4 bi-telephone-fill ms-2"></i>
+            <li class="nav-item mb-3 w-100">
+              <a
+                (click)="sendBulkSMS()"
+                class="btn btn-light px-3 w-100 align-middle px-0"
+              >
+                <span class="ms-1 d-none d-sm-inline">Send SMS</span>
+                <i class="fs-4 bi-envelope-fill ms-2"></i>
               </a>
             </li>
           </ul>
@@ -45,7 +48,7 @@
             © Dr. Fredrick Katongole
           </p>
           <p>
-            <a class="btn btn-danger" (click)="logout()">
+            <a class="btn btn-danger w-100" (click)="logout()">
               <span class="bi bi-power me-2"></span> Logout
             </a>
           </p>
@@ -63,6 +66,9 @@
         <app-new-patient></app-new-patient>
       </div>
       <!-- Router Outlet for NewPatientComponent -->
+      <div *ngIf="bulksms" class="text-center">
+        <app-send-bulk-sms></app-send-bulk-sms>
+      </div>
       <div class="my-5" *ngIf="editedPatient">
         <h5 class="alert alert-success text-center my-5">
           Successfully edited patient
@@ -330,6 +336,12 @@
           </table>
         </div>
 
+        <div
+          class="text-center p-5"
+          *ngIf="dynamicData.length === 0 && selectedPatient"
+        >
+          <h1 class="alert alert-danger mx-auto">No Calls Yet !</h1>
+        </div>
         <!-- Optional Default Content -->
         <div *ngIf="!showPatients && !selectedPatient" class="text-center">
           <p>Welcome to the dashboard! Use the sidebar to navigate.</p>
