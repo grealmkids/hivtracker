@@ -7,6 +7,7 @@ import { NewPatientComponent } from "../new-patient/new-patient.component";
 import { SendBulkSmsComponent } from "../send-bulk-sms/send-bulk-sms.component";
 import { MakecallComponent } from "../makecall/makecall.component";
 import { NewLabResultsComponent } from "../new-lab-results/new-lab-results.component";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-dashboard',
@@ -216,7 +217,12 @@ export class DashboardComponent {
     }
 
     callSelectedPatient(arg0: any) {
-      alert(`Call selected patient ${this.selectedPatient.id}`)
+           Swal.fire({  
+              
+        html: `<p>Call selected patient ID No.<p><p class="text-success"> <strong>${this.selectedPatient.id}</strong></p>`,  
+        icon: 'warning',  
+        confirmButtonText: 'Okay'  
+    }); 
       }
 
       showlabresults() {
@@ -239,6 +245,6 @@ export class DashboardComponent {
         }
         
         labforselectedpatient(arg0: any) {
-          alert(`LAB RESULTS FOR PATIENT ID NO:  ${this.selectedPatient.id}`)
-          }
+      
+          alert(`EMPTY LAB RESULTS FOR PATIENT ID NO: ${this.selectedPatient.id}`);}
 }
