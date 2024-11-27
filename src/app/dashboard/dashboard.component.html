@@ -11,7 +11,7 @@
             class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
             id="menu"
           >
-            <li class="nav-item mt-5 mb-3">
+            <li class="nav-item mt-5 mb-3 w-100">
               <button
                 (click)="showAllPatients()"
                 class="btn blackbtn w-100 px-3 align-middle px-0"
@@ -21,7 +21,7 @@
               </button>
             </li>
             <!-- Sidebar Item to add New Patient -->
-            <li class="nav-item mb-3">
+            <li class="nav-item mb-3 w-100">
               <button
                 (click)="navigateToAddPatient()"
                 class="btn btn-light px-3 w-100 align-middle px-0"
@@ -40,6 +40,15 @@
                 <i class="fs-4 bi-envelope-fill ms-2"></i>
               </a>
             </li>
+            <li class="nav-item mb-3 w-100">
+              <a
+                (click)="showlabresults()"
+                class="btn btn-light px-3 w-100 align-middle px-0"
+              >
+                <span class="ms-1 d-none d-sm-inline">Show Lab Results</span>
+                <i class="fs-4 bi-gear-wide-connected ms-2"></i>
+              </a>
+            </li>
           </ul>
 
           <hr />
@@ -47,7 +56,7 @@
           <p class="mt-0 mb-3 text-white text-center">
             © Dr. Fredrick Katongole
           </p>
-          <p>
+          <p class="w-100">
             <a class="btn btn-danger w-100" (click)="logout()">
               <span class="bi bi-power me-2"></span> Logout
             </a>
@@ -71,6 +80,9 @@
       <!-- Router Outlet for NewPatientComponent -->
       <div *ngIf="bulksms && !showDynamicData" class="text-center">
         <app-send-bulk-sms></app-send-bulk-sms>
+      </div>
+      <div *ngIf="labresults && !showDynamicData" class="text-center">
+        <h1 class="text-danger">SHOW LAB RESULTS</h1>
       </div>
       <div *ngIf="makecall" class="text-center">
         <app-makecall></app-makecall>
@@ -318,7 +330,8 @@
             selectedPatient &&
             !editedPatient &&
             !editPatientFormVisible &&
-            !bulksms
+            !bulksms &&
+            !labresults
           "
           class="mt-4"
         >

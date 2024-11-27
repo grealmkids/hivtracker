@@ -16,6 +16,7 @@ import { MakecallComponent } from "../makecall/makecall.component";
 export class DashboardComponent {
 
 
+
   patients: any[] = [];
   selectedPatient: any = null;
   dynamicData: any[] = [];
@@ -29,6 +30,7 @@ export class DashboardComponent {
   filteredPatients: any[] = []; // New variable for filtered patients
   bulksms:boolean=false;
   makecall:boolean=false;
+  labresults:boolean=false;
 
   deletedPatientAlert = false;  // Corrected variable name
 
@@ -118,6 +120,7 @@ export class DashboardComponent {
       if (error) {
         console.error('Error updating patient:', error);
       } else {
+        this.labresults=false;
         this.editPatientFormVisible = false;
         this.editedPatient = true;  // Reload the patient list after update
       }
@@ -136,6 +139,7 @@ export class DashboardComponent {
     this.showPatients = false;
     this.bulksms=false;
     this.editPatientFormVisible = false;
+    this.labresults=false;
     const { data, error } = await this.supabaseService.getDynamicData(patientId);
     if (error) {
       console.error('Error fetching dynamic data:', error);
@@ -152,11 +156,12 @@ export class DashboardComponent {
     this.selectedPatient = null; // Reset selected patient
     this.dynamicData = []; // Clear dynamic data
     this.bulksms=false;
-    
+    this.labresults=false;
   }
 
   // Function to navigate to the new patient form
   navigateToAddPatient() {
+    this.labresults=false;
     this.editPatientFormVisible = false;
     this.showDynamicData = false;
     this.showPatients = false;  // Hide patient list
@@ -172,6 +177,7 @@ export class DashboardComponent {
         console.error('Error deleting patient:', error);
       } else {
         this.bulksms=false;
+        this.labresults=false;
         this.deletedpatientAlert=true;
         this.selectedPatient = null;  // Reset selected patient after deletion
         this.editPatientFormVisible = false;  // Hide edit form after deletion
@@ -199,11 +205,20 @@ export class DashboardComponent {
     this.newPatient = false;  // Show new patient form
     this.bulksms=true;
     this.editPatientFormVisible = false;
+    this.labresults=false;
     }
 
     callSelectedPatient(arg0: any) {
-      alert('Call selected patient')
+      alert(`Call selected patient ${this.selectedPatient.id}`)
       }
 
+      showlabresults() {
+        this.showDynamicData = false;
+        this.showPatients = false;  // Hide patient list
+        this.newPatient = false;  // Show new patient form
+        this.bulksms=false;
+        this.editPatientFormVisible = false;
+       this.labresults=true;
+        }
 
 }
