@@ -99,4 +99,11 @@ export class SupabaseService {
   async deletePatient(patientId: string) {
     return this.supabase.from('static_patient_data').delete().eq('id', patientId);
   }
+
+  // Fetch lab results for a specific patient
+// Fetch all lab results
+async getLabResults() {
+  return this.supabase.from('labresults').select('*');
+}
+
 }

@@ -78,12 +78,65 @@
         <app-new-patient></app-new-patient>
       </div>
       <!-- Router Outlet for NewPatientComponent -->
-      <div *ngIf="bulksms && !showDynamicData" class="text-center">
+      <div
+        *ngIf="bulksms && !showDynamicData && !labresults"
+        class="text-center"
+      >
         <app-send-bulk-sms></app-send-bulk-sms>
       </div>
-      <div *ngIf="labresults && !showDynamicData" class="text-center">
-        <h1 class="text-danger">SHOW LAB RESULTS</h1>
+      <!-- Existing code -->
+
+      <div
+        *ngIf="
+          labresults &&
+          !showDynamicData &&
+          !showPatients &&
+          !editPatientFormVisible &&
+          !newPatient
+        "
+        class="text-center"
+      >
+        <h1 class="text-danger">Lab Results</h1>
+
+        <!-- Display patient and lab result data -->
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Patient ID</th>
+              <th>Last HIV Viral Load</th>
+              <th>Last HIV Date Done</th>
+              <th>First Trimester Viral Load</th>
+              <th>First Trimester Date Done</th>
+              <th>Second Trimester Viral Load</th>
+              <th>Second Trimester Date Done</th>
+              <th>Third Trimester Viral Load</th>
+              <th>Third Trimester Date Done</th>
+              <th>Baby PCR at 6 Months</th>
+              <th>Baby PCR Date Done</th>
+              <th>HIV Serology at 18 Months</th>
+              <th>HIV Serology Date Done</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let labResult of AllLabResults">
+              <td>{{ labResult.patient_id }}</td>
+              <td>{{ labResult.last_hiv_viral_load }}</td>
+              <td>{{ labResult.last_hiv_date_done | date }}</td>
+              <td>{{ labResult.first_trimester_viral_load }}</td>
+              <td>{{ labResult.first_trimester_date_done | date }}</td>
+              <td>{{ labResult.second_trimester_viral_load }}</td>
+              <td>{{ labResult.second_trimester_date_done | date }}</td>
+              <td>{{ labResult.third_trimester_viral_load }}</td>
+              <td>{{ labResult.third_trimester_date_done | date }}</td>
+              <td>{{ labResult.baby_pcr_at_6_months }}</td>
+              <td>{{ labResult.baby_pcr_date_done | date }}</td>
+              <td>{{ labResult.hiv_serology_at_18_months }}</td>
+              <td>{{ labResult.hiv_serology_date_done | date }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+
       <div *ngIf="makecall" class="text-center">
         <app-makecall></app-makecall>
       </div>

@@ -31,6 +31,7 @@ export class DashboardComponent {
   bulksms:boolean=false;
   makecall:boolean=false;
   labresults:boolean=false;
+  AllLabResults: any[] = [];
 
   deletedPatientAlert = false;  // Corrected variable name
 
@@ -89,6 +90,7 @@ export class DashboardComponent {
     this.newPatient = false;  // Show new patient form
     this.selectedPatient = patient;
     this.bulksms=false;
+    this.labresults=false;
 
     this.editPatientForm.patchValue({
       name: patient.name,
@@ -108,6 +110,7 @@ export class DashboardComponent {
     // Set the form to be visible
     this.showDynamicData = false;
     this.bulksms=false;
+    this.labresults=false;
     this.editPatientFormVisible = true;
   }
 
@@ -140,6 +143,7 @@ export class DashboardComponent {
     this.bulksms=false;
     this.editPatientFormVisible = false;
     this.labresults=false;
+    
     const { data, error } = await this.supabaseService.getDynamicData(patientId);
     if (error) {
       console.error('Error fetching dynamic data:', error);
@@ -203,9 +207,10 @@ export class DashboardComponent {
     this.showDynamicData = false;
     this.showPatients = false;  // Hide patient list
     this.newPatient = false;  // Show new patient form
+    this.labresults=false;
     this.bulksms=true;
     this.editPatientFormVisible = false;
-    this.labresults=false;
+    
     }
 
     callSelectedPatient(arg0: any) {
@@ -219,6 +224,17 @@ export class DashboardComponent {
         this.bulksms=false;
         this.editPatientFormVisible = false;
        this.labresults=true;
+       this.loadLabResults();
         }
+
+        async loadLabResults() {
+          const { data, error } = await this.supabaseService.getLabResults();
+          if (error) {
+            console.error('Error fetching lab results:', error);
+          } else {
+            this.AllLabResults = data || [];
+          }
+        }
+        
 
 }
