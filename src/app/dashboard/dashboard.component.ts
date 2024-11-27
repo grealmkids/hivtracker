@@ -182,6 +182,9 @@ export class DashboardComponent {
   }
 
   sendBulkSMS() {
-    this.router.navigateByUrl('/bulksms');
+    this.showDynamicData = false;
+    this.showPatients = false;  // Hide patient list
+    this.newPatient = false;  // Show new patient form
+    this.bulksms=true;
     }
 }
