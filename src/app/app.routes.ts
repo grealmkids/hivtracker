@@ -32,6 +32,14 @@ export const routes: Routes = [
     canActivate: [AuthGuard], // Ensure that only authenticated users can access
   },
   {
+    path: 'add-lab-results', // New route for adding a patient
+    loadComponent: () =>
+      import('./new-lab-results/new-lab-results.component').then(
+        (com) => com.NewLabResultsComponent
+      ),
+    canActivate: [AuthGuard], // Ensure that only authenticated users can access
+  },
+  {
     path: 'bulksms', // New route for adding a patient
     loadComponent: () =>
       import('./send-bulk-sms/send-bulk-sms.component').then(

@@ -77,6 +77,10 @@
       >
         <app-new-patient></app-new-patient>
       </div>
+
+      <div *ngIf="" class="text-center">
+        <app-new-lab-results></app-new-lab-results>
+      </div>
       <!-- Router Outlet for NewPatientComponent -->
       <div
         *ngIf="bulksms && !showDynamicData && !labresults"
@@ -395,6 +399,12 @@
               (click)="callSelectedPatient(selectedPatient.id)"
             >
               Make Call <span class="bi bi-telephone-fill"></span>
+            </button>
+            <button
+              class="ms-3 btn btn-info"
+              (click)="labforselectedpatient(selectedPatient.id)"
+            >
+              Lab results <span class="bi bi-gear-wide-connected"></span>
             </button>
           </h2>
           <table class="table table-bordered table-hover">

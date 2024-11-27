@@ -6,14 +6,16 @@ import { CommonModule } from '@angular/common';
 import { NewPatientComponent } from "../new-patient/new-patient.component";
 import { SendBulkSmsComponent } from "../send-bulk-sms/send-bulk-sms.component";
 import { MakecallComponent } from "../makecall/makecall.component";
+import { NewLabResultsComponent } from "../new-lab-results/new-lab-results.component";
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, RouterModule, ReactiveFormsModule, NewPatientComponent, SendBulkSmsComponent, MakecallComponent],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule, NewPatientComponent, SendBulkSmsComponent, MakecallComponent, NewLabResultsComponent],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent {
+
 
 
 
@@ -236,5 +238,7 @@ export class DashboardComponent {
           }
         }
         
-
+        labforselectedpatient(arg0: any) {
+          alert(`LAB RESULTS FOR PATIENT ID NO:  ${this.selectedPatient.id}`)
+          }
 }
