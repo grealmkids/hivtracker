@@ -103,6 +103,7 @@ export class DashboardComponent {
 
     // Set the form to be visible
     this.showDynamicData = false;
+    this.bulksms=false;
     this.editPatientFormVisible = true;
   }
 
@@ -131,6 +132,8 @@ export class DashboardComponent {
   async loadDynamicData(patientId: string) {
     this.selectedPatient = this.patients.find((p) => p.id === patientId);
     this.showPatients = false;
+    this.bulksms=false;
+    this.editPatientFormVisible = false;
     const { data, error } = await this.supabaseService.getDynamicData(patientId);
     if (error) {
       console.error('Error fetching dynamic data:', error);
@@ -152,6 +155,7 @@ export class DashboardComponent {
 
   // Function to navigate to the new patient form
   navigateToAddPatient() {
+    this.editPatientFormVisible = false;
     this.showDynamicData = false;
     this.showPatients = false;  // Hide patient list
     this.bulksms=false;
@@ -165,6 +169,7 @@ export class DashboardComponent {
       if (error) {
         console.error('Error deleting patient:', error);
       } else {
+        this.bulksms=false;
         this.deletedpatientAlert=true;
         this.selectedPatient = null;  // Reset selected patient after deletion
         this.editPatientFormVisible = false;  // Hide edit form after deletion
@@ -191,5 +196,6 @@ export class DashboardComponent {
     this.showPatients = false;  // Hide patient list
     this.newPatient = false;  // Show new patient form
     this.bulksms=true;
+    this.editPatientFormVisible = false;
     }
 }

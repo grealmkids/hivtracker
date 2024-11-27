@@ -69,10 +69,7 @@
         <app-new-patient></app-new-patient>
       </div>
       <!-- Router Outlet for NewPatientComponent -->
-      <div
-        *ngIf="bulksms && !showDynamicData && !showDynamicData"
-        class="text-center"
-      >
+      <div *ngIf="bulksms && !showDynamicData" class="text-center">
         <app-send-bulk-sms></app-send-bulk-sms>
       </div>
       <div *ngIf="makecall" class="text-center">
@@ -316,7 +313,15 @@
         </div>
 
         <!-- Dynamic Data for the selected patient -->
-        <div *ngIf="selectedPatient && !editedPatient" class="mt-4">
+        <div
+          *ngIf="
+            selectedPatient &&
+            !editedPatient &&
+            !editPatientFormVisible &&
+            !bulksms
+          "
+          class="mt-4"
+        >
           <h2 class="subtitle">
             Track <span class="text-danger">{{ selectedPatient.name }}</span>
             <button class="ms-3 btn btn-success">
@@ -346,16 +351,20 @@
               </tr>
             </tbody>
           </table>
+
+          <div
+            class="text-center p-5"
+            *ngIf="dynamicData.length === 0 && selectedPatient"
+          >
+            <h1 class="alert alert-danger mx-auto">No Calls Yet !</h1>
+          </div>
         </div>
 
-        <div
-          class="text-center p-5"
-          *ngIf="dynamicData.length === 0 && selectedPatient"
-        >
-          <h1 class="alert alert-danger mx-auto">No Calls Yet !</h1>
-        </div>
         <!-- Optional Default Content -->
-        <div *ngIf="!showPatients && !selectedPatient" class="text-center">
+        <div
+          *ngIf="!showPatients && !selectedPatient"
+          class="text-center d-none"
+        >
           <p>Welcome to the dashboard! Use the sidebar to navigate.</p>
         </div>
       </div>
