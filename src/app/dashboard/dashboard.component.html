@@ -324,7 +324,10 @@
         >
           <h2 class="subtitle">
             Track <span class="text-danger">{{ selectedPatient.name }}</span>
-            <button class="ms-3 btn btn-success">
+            <button
+              class="ms-3 btn btn-success"
+              (click)="callSelectedPatient(selectedPatient.id)"
+            >
               Make Call <span class="bi bi-telephone-fill"></span>
             </button>
           </h2>

@@ -15,6 +15,7 @@ import { MakecallComponent } from "../makecall/makecall.component";
 })
 export class DashboardComponent {
 
+
   patients: any[] = [];
   selectedPatient: any = null;
   dynamicData: any[] = [];
@@ -32,6 +33,7 @@ export class DashboardComponent {
   deletedPatientAlert = false;  // Corrected variable name
 
   searchQuery: string = ''; // Added search query
+
 
   constructor(
     private supabaseService: SupabaseService,
@@ -198,4 +200,10 @@ export class DashboardComponent {
     this.bulksms=true;
     this.editPatientFormVisible = false;
     }
+
+    callSelectedPatient(arg0: any) {
+      alert('Call selected patient')
+      }
+
+
 }
