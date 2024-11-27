@@ -71,19 +71,80 @@
         National Maternal Tracker
       </h1>
 
+      <!-- Show Lab Results -->
+      <div *ngIf="labResultForselectedpatient" class="text-center">
+        <h2 class="subtitle">
+          <button
+            class="btn btn-sm me-3 btn-dark m-1"
+            (click)="loadDynamicData(selectedPatient.id)"
+          >
+            <span class="bi bi-arrow-left"></span> Back to tack
+          </button>
+          Lab Results for
+          <span class="text-danger">{{ selectedPatient.name }}</span>
+        </h2>
+
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Patient ID</th>
+              <th>Last HIV Viral Load</th>
+              <th>Last HIV Date Done</th>
+              <th>First Trimester Viral Load</th>
+              <th>First Trimester Date Done</th>
+              <th>Second Trimester Viral Load</th>
+              <th>Second Trimester Date Done</th>
+              <th>Third Trimester Viral Load</th>
+              <th>Third Trimester Date Done</th>
+              <th>Baby PCR at 6 Months</th>
+              <th>Baby PCR Date Done</th>
+              <th>HIV Serology at 18 Months</th>
+              <th>HIV Serology Date Done</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let labResult of selectedPatientLabResults">
+              <td>{{ labResult.patient_id }}</td>
+              <td>{{ labResult.last_hiv_viral_load }}</td>
+              <td>{{ labResult.last_hiv_date_done | date }}</td>
+              <td>{{ labResult.first_trimester_viral_load }}</td>
+              <td>{{ labResult.first_trimester_date_done | date }}</td>
+              <td>{{ labResult.second_trimester_viral_load }}</td>
+              <td>{{ labResult.second_trimester_date_done | date }}</td>
+              <td>{{ labResult.third_trimester_viral_load }}</td>
+              <td>{{ labResult.third_trimester_date_done | date }}</td>
+              <td>{{ labResult.baby_pcr_at_6_months }}</td>
+              <td>{{ labResult.baby_pcr_date_done | date }}</td>
+              <td>{{ labResult.hiv_serology_at_18_months }}</td>
+              <td>{{ labResult.hiv_serology_date_done | date }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
       <div
-        *ngIf="newPatient && !bulksms && !showDynamicData"
+        *ngIf="
+          newPatient &&
+          !bulksms &&
+          !showDynamicData &&
+          !labResultForselectedpatient
+        "
         class="text-center"
       >
         <app-new-patient></app-new-patient>
       </div>
 
-      <div *ngIf="" class="text-center">
+      <div *ngIf="newlabresults" class="text-center">
         <app-new-lab-results></app-new-lab-results>
       </div>
       <!-- Router Outlet for NewPatientComponent -->
       <div
-        *ngIf="bulksms && !showDynamicData && !labresults"
+        *ngIf="
+          bulksms &&
+          !showDynamicData &&
+          !labresults &&
+          !labResultForselectedpatient
+        "
         class="text-center"
       >
         <app-send-bulk-sms></app-send-bulk-sms>
@@ -96,7 +157,8 @@
           !showDynamicData &&
           !showPatients &&
           !editPatientFormVisible &&
-          !newPatient
+          !newPatient &&
+          !labResultForselectedpatient
         "
         class="text-center"
       >
@@ -242,7 +304,11 @@
 
         <!-- Edit Patient Form -->
         <div
-          *ngIf="editPatientFormVisible && !showDynamicData"
+          *ngIf="
+            editPatientFormVisible &&
+            !showDynamicData &&
+            !labResultForselectedpatient
+          "
           class="container"
         >
           <h2 class="text-center subtitle">
@@ -388,7 +454,8 @@
             !editedPatient &&
             !editPatientFormVisible &&
             !bulksms &&
-            !labresults
+            !labresults &&
+            !labResultForselectedpatient
           "
           class="mt-4"
         >
@@ -402,7 +469,7 @@
             </button>
             <button
               class="ms-3 btn btn-info"
-              (click)="labforselectedpatient(selectedPatient.id)"
+              (click)="loadLabResults(selectedPatient.id)"
             >
               Lab results <span class="bi bi-gear-wide-connected"></span>
             </button>
@@ -437,7 +504,11 @@
 
           <div
             class="text-center p-5"
-            *ngIf="dynamicData.length === 0 && selectedPatient"
+            *ngIf="
+              dynamicData.length === 0 &&
+              selectedPatient &&
+              !labResultForselectedpatient
+            "
           >
             <h1 class="alert alert-danger mx-auto">No Calls Yet !</h1>
           </div>
@@ -445,7 +516,9 @@
 
         <!-- Optional Default Content -->
         <div
-          *ngIf="!showPatients && !selectedPatient"
+          *ngIf="
+            !showPatients && !selectedPatient && !labResultForselectedpatient
+          "
           class="text-center d-none"
         >
           <p>Welcome to the dashboard! Use the sidebar to navigate.</p>

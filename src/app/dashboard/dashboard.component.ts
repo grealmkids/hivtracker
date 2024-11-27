@@ -19,7 +19,8 @@ export class DashboardComponent {
 
 
 
-
+  labResultForselectedpatient:boolean=false;
+newlabresults:boolean=false;
   patients: any[] = [];
   selectedPatient: any = null;
   dynamicData: any[] = [];
@@ -39,6 +40,7 @@ export class DashboardComponent {
   deletedPatientAlert = false;  // Corrected variable name
 
   searchQuery: string = ''; // Added search query
+labForselectedPatient: any;
 
 
   constructor(
@@ -94,6 +96,7 @@ export class DashboardComponent {
     this.selectedPatient = patient;
     this.bulksms=false;
     this.labresults=false;
+    this.labResultForselectedpatient=false;
 
     this.editPatientForm.patchValue({
       name: patient.name,
@@ -129,6 +132,7 @@ export class DashboardComponent {
         this.labresults=false;
         this.editPatientFormVisible = false;
         this.editedPatient = true;  // Reload the patient list after update
+        this.labResultForselectedpatient=false;
       }
     } catch (error) {
       console.log(error);
@@ -146,6 +150,7 @@ export class DashboardComponent {
     this.bulksms=false;
     this.editPatientFormVisible = false;
     this.labresults=false;
+    this.labResultForselectedpatient=false;
     
     const { data, error } = await this.supabaseService.getDynamicData(patientId);
     if (error) {
@@ -164,6 +169,7 @@ export class DashboardComponent {
     this.dynamicData = []; // Clear dynamic data
     this.bulksms=false;
     this.labresults=false;
+    this.labResultForselectedpatient=false;
   }
 
   // Function to navigate to the new patient form
@@ -174,6 +180,7 @@ export class DashboardComponent {
     this.showPatients = false;  // Hide patient list
     this.bulksms=false;
     this.newPatient = true;  // Show new patient form
+    this.labResultForselectedpatient=false;
   }
 
   // Delete patient function
@@ -188,6 +195,7 @@ export class DashboardComponent {
         this.deletedpatientAlert=true;
         this.selectedPatient = null;  // Reset selected patient after deletion
         this.editPatientFormVisible = false;  // Hide edit form after deletion
+        this.labResultForselectedpatient=false;
       }
     }
   }
@@ -202,7 +210,7 @@ export class DashboardComponent {
     this.searchQuery = query.toLowerCase();
     this.filteredPatients = this.patients.filter(patient =>
       patient.name.toLowerCase().includes(this.searchQuery) ||
-      patient.mobile.includes(this.searchQuery) // Add other fields as needed
+      patient.mobile.includes(this.searchQuery)
     );
   }
 
@@ -213,6 +221,7 @@ export class DashboardComponent {
     this.labresults=false;
     this.bulksms=true;
     this.editPatientFormVisible = false;
+    this.labResultForselectedpatient=false;
     
     }
 
@@ -232,19 +241,31 @@ export class DashboardComponent {
         this.bulksms=false;
         this.editPatientFormVisible = false;
        this.labresults=true;
-       this.loadLabResults();
+      this.labResultForselectedpatient=false;
+      
+       this.loadLabResults(this.selectedPatient.id);
         }
 
-        async loadLabResults() {
-          const { data, error } = await this.supabaseService.getLabResults();
+  
+        
+  
+        selectedPatientLabResults: any[] = [];
+
+        loadLabResults(patientId: number) {
+          this.labResultForselectedpatient = true;  // Keep lab results flag true to show the lab results section
+          this.fetchLabResults(patientId);  // Fetch the lab results for the selected patient
+        }
+      
+ 
+
+        async fetchLabResults(patientId: number) {
+          const { data, error } = await this.supabaseService.getLabResultsForPatient(patientId.toString());
           if (error) {
             console.error('Error fetching lab results:', error);
           } else {
-            this.AllLabResults = data || [];
+            this.selectedPatientLabResults = data || [];
           }
         }
         
-        labforselectedpatient(arg0: any) {
-      
-          alert(`EMPTY LAB RESULTS FOR PATIENT ID NO: ${this.selectedPatient.id}`);}
+          
 }

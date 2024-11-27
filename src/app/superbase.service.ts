@@ -102,8 +102,14 @@ export class SupabaseService {
 
   // Fetch lab results for a specific patient
 // Fetch all lab results
-async getLabResults() {
-  return this.supabase.from('labresults').select('*');
+
+
+async getLabResultsForPatient(patientId: string) {
+  return this.supabase
+    .from('labresults')
+    .select('*')
+    .eq('patient_id', patientId);  // Filter lab results by patient_id
 }
+
 
 }
