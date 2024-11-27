@@ -228,7 +228,7 @@ labForselectedPatient: any;
     callSelectedPatient(arg0: any) {
            Swal.fire({  
               
-        html: `<p>Call selected patient ID No.<p><p class="text-success"> <strong>${this.selectedPatient.id}</strong></p>`,  
+        html: `<p>Update data for <p><p class="text-success"> <strong>${this.selectedPatient.name}</strong></p><h3 class="text-secondary"> TEL : <span class="text-dark"> ${this.selectedPatient.mobile} </span> </h3>`,  
         icon: 'warning',  
         confirmButtonText: 'Okay'  
     }); 
