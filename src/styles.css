@@ -42,3 +42,8 @@ body {
 .innerform input {
   border: 2px solid #000000;
 }
+
+.btn-success {
+  background-color: #32ac36;
+  color: #ffffff;
+}

@@ -5,10 +5,11 @@ import { SupabaseService } from '../superbase.service';
 import { CommonModule } from '@angular/common';
 import { NewPatientComponent } from "../new-patient/new-patient.component";
 import { SendBulkSmsComponent } from "../send-bulk-sms/send-bulk-sms.component";
+import { MakecallComponent } from "../makecall/makecall.component";
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, RouterModule, ReactiveFormsModule, NewPatientComponent, SendBulkSmsComponent],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule, NewPatientComponent, SendBulkSmsComponent, MakecallComponent],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
@@ -26,6 +27,7 @@ export class DashboardComponent {
   deletedpatientAlert:boolean=false;
   filteredPatients: any[] = []; // New variable for filtered patients
   bulksms:boolean=false;
+  makecall:boolean=false;
 
   deletedPatientAlert = false;  // Corrected variable name
 

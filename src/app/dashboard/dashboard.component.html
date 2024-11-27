@@ -69,6 +69,9 @@
       <div *ngIf="bulksms" class="text-center">
         <app-send-bulk-sms></app-send-bulk-sms>
       </div>
+      <div *ngIf="makecall" class="text-center">
+        <app-makecall></app-makecall>
+      </div>
       <div class="my-5" *ngIf="editedPatient">
         <h5 class="alert alert-success text-center my-5">
           Successfully edited patient
@@ -310,6 +313,9 @@
         <div *ngIf="selectedPatient && !editedPatient" class="mt-4">
           <h2 class="subtitle">
             Track <span class="text-danger">{{ selectedPatient.name }}</span>
+            <button class="ms-3 btn btn-success">
+              Make Call <span class="bi bi-telephone-fill"></span>
+            </button>
           </h2>
           <table class="table table-bordered table-hover">
             <thead>

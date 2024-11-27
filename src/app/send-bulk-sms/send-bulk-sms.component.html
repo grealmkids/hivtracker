@@ -1,1 +1,66 @@
-<p>send-bulk-sms works!</p>
+<div class="container" *ngIf="showsendBulkSmsForm">
+  <h2 class="subtitle">Send Bulk SMS</h2>
+  <form [formGroup]="sendBulkSmsForm" (ngSubmit)="onSubmit()" class="innerform">
+    <div class="row mx-auto">
+      <div class="col-12 col-md-3"></div>
+
+      <!-- Inputs Column -->
+      <div class="col-12 col-md-6">
+        <div class="form-group">
+          <label for="smsScheduleDate">SMS Schedule Date</label>
+          <input
+            id="smsScheduleDate"
+            formControlName="smsScheduleDate"
+            type="date"
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="smsScheduleTime">SMS Schedule Time</label>
+          <input
+            id="smsScheduleTime"
+            formControlName="smsScheduleTime"
+            type="time"
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="district">Select Patients by District</label>
+          <select id="district" formControlName="district" class="form-control">
+            <option *ngFor="let district of districts" [value]="district">
+              {{ district }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea
+            id="message"
+            formControlName="message"
+            class="form-control"
+            rows="4"
+          ></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 mt-3">
+          Send SMS
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="my-5" *ngIf="!showsendBulkSmsForm">
+  <h5 class="alert alert-success text-center my-5">
+    Successfully sent SMS <i class="bi bi-check-fill text-success"></i>
+  </h5>
+  <p class="text-center">
+    <a (click)="showAllPatients()" class="btn btn-dark px-3 align-middle px-0">
+      <span class="ms-1 d-none d-sm-inline">All Patients</span>
+      <i class="fs-4 bi-database-fill ms-2"></i>
+    </a>
+  </p>
+</div>
