@@ -62,11 +62,17 @@
         National Maternal Tracker
       </h1>
 
-      <div *ngIf="newPatient" class="text-center">
+      <div
+        *ngIf="newPatient && !bulksms && !showDynamicData"
+        class="text-center"
+      >
         <app-new-patient></app-new-patient>
       </div>
       <!-- Router Outlet for NewPatientComponent -->
-      <div *ngIf="bulksms" class="text-center">
+      <div
+        *ngIf="bulksms && !showDynamicData && !showDynamicData"
+        class="text-center"
+      >
         <app-send-bulk-sms></app-send-bulk-sms>
       </div>
       <div *ngIf="makecall" class="text-center">

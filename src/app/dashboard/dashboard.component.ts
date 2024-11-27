@@ -84,6 +84,7 @@ export class DashboardComponent {
     this.showPatients = false;
     this.newPatient = false;  // Show new patient form
     this.selectedPatient = patient;
+    this.bulksms=false;
 
     this.editPatientForm.patchValue({
       name: patient.name,
@@ -145,6 +146,7 @@ export class DashboardComponent {
     this.showPatients = true; // Show the patient list
     this.selectedPatient = null; // Reset selected patient
     this.dynamicData = []; // Clear dynamic data
+    this.bulksms=false;
     
   }
 
@@ -152,6 +154,7 @@ export class DashboardComponent {
   navigateToAddPatient() {
     this.showDynamicData = false;
     this.showPatients = false;  // Hide patient list
+    this.bulksms=false;
     this.newPatient = true;  // Show new patient form
   }
 
