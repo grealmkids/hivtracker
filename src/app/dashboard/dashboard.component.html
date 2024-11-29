@@ -170,7 +170,7 @@
         <app-new-lab-results></app-new-lab-results>
       </div>
 
-      <div *ngIf="showmakecall" class="text-center">
+      <div *ngIf="showmakecall && !showDynamicData" class="text-center">
         <app-makecall></app-makecall>
       </div>
       <!-- Router Outlet for NewPatientComponent -->
@@ -491,7 +491,8 @@
             !editPatientFormVisible &&
             !bulksms &&
             !labresults &&
-            !labResultForselectedpatient
+            !labResultForselectedpatient &&
+            !showmakecall
           "
           class="mt-4"
         >
