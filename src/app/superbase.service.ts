@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { environment } from '../environments/environment.development';
 
@@ -8,6 +8,8 @@ import { environment } from '../environments/environment.development';
 })
 export class SupabaseService {
   private supabase: SupabaseClient;
+    // Signal for selected patient ID
+    selectedPatientId = signal<string | null>(null);
 
   constructor() {
     // Initialize Supabase client
@@ -76,8 +78,18 @@ export class SupabaseService {
 
   // Add new dynamic data for a patient
   async addDynamicData(dynamicData: any) {
-    return this.supabase.from('dynamic_patient_data').insert(dynamicData);
+    const { data, error } = await this.supabase
+      .from('dynamic_patient_data')
+      .insert(dynamicData);
+
+    if (error) {
+      console.error('Error inserting data:', error.message);
+      throw error; // Pass the error to the calling method
+    }
+    console.log('Data successfully inserted:', data);
+    return data;
   }
+  
 
   // Update static patient data by ID
   async updateStaticPatient(patientId: string, updatedData: any) {

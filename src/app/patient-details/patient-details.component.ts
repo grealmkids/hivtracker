@@ -33,6 +33,7 @@ export class PatientDetailsComponent implements OnInit {
     } else {
       this.patientData = data[0]; // Assuming `getPatientWithDynamicData` returns an array
       this.dynamicData = this.patientData.dynamic_patient_data || [];
+      
     }
   }
 }

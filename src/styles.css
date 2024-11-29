@@ -28,7 +28,9 @@ body {
   text-align: center;
 }
 .dashheader {
-  color: #247393;
+  background-color: #247393;
+  color: #ffffff;
+  padding: 10px;
 }
 
 .logininput {

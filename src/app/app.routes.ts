@@ -49,6 +49,15 @@ export const routes: Routes = [
   },
   
   {
+    path: 'makecall', // New route for MakecallComponent
+    loadComponent: () =>
+      import('./makecall/makecall.component').then(
+        (com) => com.MakeCallComponent
+      ),
+    canActivate: [AuthGuard],
+  },
+  
+  {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full',

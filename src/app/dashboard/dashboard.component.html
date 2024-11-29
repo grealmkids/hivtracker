@@ -169,6 +169,10 @@
       <div *ngIf="newlabresults" class="text-center">
         <app-new-lab-results></app-new-lab-results>
       </div>
+
+      <div *ngIf="showmakecall" class="text-center">
+        <app-makecall></app-makecall>
+      </div>
       <!-- Router Outlet for NewPatientComponent -->
       <div
         *ngIf="
@@ -497,7 +501,7 @@
               class="ms-3 btn btn-success"
               (click)="callSelectedPatient(selectedPatient.id)"
             >
-              Update <span class="bi bi-plus"></span>
+              New Call <span class="bi bi-plus"></span>
             </button>
             <button
               class="ms-3 btn btn-info"

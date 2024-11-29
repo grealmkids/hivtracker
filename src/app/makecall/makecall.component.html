@@ -1,1 +1,124 @@
-<p>makecall works!</p>
+<div class="container mt-4">
+  <h2 class="text-center">Edit Dynamic Patient Data</h2>
+  <form [formGroup]="makeCallForm" (ngSubmit)="onSubmitDynamic()">
+    <!-- Hidden field for patient_id -->
+    <input type="hidden" formControlName="patient_id" />
+
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="row">
+          <!-- Reminder Call Number -->
+          <div class="col-md-6 mb-3">
+            <label for="reminderCallNumber" class="form-label"
+              >Reminder Call Number</label
+            >
+            <input
+              type="number"
+              id="reminderCallNumber"
+              class="form-control"
+              formControlName="reminder_call_number"
+              placeholder="Enter Reminder Call Number"
+            />
+          </div>
+
+          <!-- Reminder Date -->
+          <div class="col-md-6 mb-3">
+            <label for="reminderDate" class="form-label">Reminder Date</label>
+            <input
+              type="date"
+              id="reminderDate"
+              class="form-control"
+              formControlName="reminder_date"
+            />
+          </div>
+
+          <!-- Adherence Challenges -->
+          <div class="col-md-6 mb-3">
+            <label for="adherenceChallenges" class="form-label"
+              >Adherence Challenges</label
+            >
+            <input
+              type="text"
+              id="adherenceChallenges"
+              class="form-control"
+              formControlName="adherence_challenges"
+              placeholder="Describe any challenges"
+            />
+          </div>
+
+          <!-- Complaint -->
+          <div class="col-md-6 mb-3">
+            <label for="complaint" class="form-label">Complaint</label>
+            <input
+              type="text"
+              id="complaint"
+              class="form-control"
+              formControlName="complaint"
+              placeholder="Enter complaint"
+            />
+          </div>
+
+          <!-- Complaint Status -->
+          <div class="col-md-6 mb-3">
+            <label for="complaintStatus" class="form-label"
+              >Complaint Status</label
+            >
+            <input
+              type="text"
+              id="complaintStatus"
+              class="form-control"
+              formControlName="complaint_status"
+              placeholder="Enter complaint status"
+            />
+          </div>
+
+          <!-- Baby PCR Result -->
+          <div class="col-md-6 mb-3">
+            <label for="babyPcrResult" class="form-label"
+              >Baby PCR Result</label
+            >
+            <input
+              type="text"
+              id="babyPcrResult"
+              class="form-control"
+              formControlName="baby_pcr_result"
+              placeholder="Enter baby PCR result"
+            />
+          </div>
+
+          <!-- HIV Serology -->
+          <div class="col-md-6 mb-3">
+            <label for="hivSerology" class="form-label"
+              >HIV Serology (18 Months)</label
+            >
+            <input
+              type="text"
+              id="hivSerology"
+              class="form-control"
+              formControlName="hiv_serology_18_months"
+              placeholder="Enter HIV serology result"
+            />
+          </div>
+
+          <!-- Exit Status -->
+          <div class="col-md-6 mb-3">
+            <label for="exitStatus" class="form-label">Exit Status</label>
+            <input
+              type="text"
+              id="exitStatus"
+              class="form-control"
+              formControlName="exit_status"
+              placeholder="Enter exit status"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Save Changes Button -->
+    <div class="text-center mt-4">
+      <button type="submit" class="btn btn-success">Save Changes</button>
+    </div>
+  </form>
+</div>
