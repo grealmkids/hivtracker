@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <h2 class="text-center">Records of the new Call</h2>
+  <h2 class="text-center subtitle">Records of the new Call</h2>
   <form [formGroup]="makeCallForm" (ngSubmit)="onSubmitDynamic()">
     <!-- Hidden field for patient_id -->
     <input type="hidden" formControlName="patient_id" />
@@ -111,14 +111,15 @@
               formControlName="exit_status"
               placeholder="Enter exit status"
             />
+
+            <p class="my-5">
+              <button type="submit" class="btn btn-success w-100">
+                Save Changes
+              </button>
+            </p>
           </div>
         </div>
       </div>
-    </div>
-
-    <!-- Save Changes Button -->
-    <div class="text-center mt-4">
-      <button type="submit" class="btn btn-success">Save Changes</button>
     </div>
   </form>
 </div>
