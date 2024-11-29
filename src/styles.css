@@ -39,6 +39,7 @@ body {
 .subtitle {
   text-align: center;
   color: #a4a4a4;
+  margin-bottom: 25px;
 }
 
 .innerform input {
